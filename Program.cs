@@ -5,7 +5,7 @@
     {
         Console.Write(i + " ");
     }
-    
+    Console.WriteLine();
 }
 void PrintStrArray(string [] arr)
 {
@@ -114,13 +114,17 @@ PrintArray(arr4);
 /////Дополнительная задача №2 была решена на семинаре
 
 /////Дополнительная задача №3
+
+
+////Программа принимает 8 пар чисел от 1 до 8
+////Каждая пара чисел вводится с новой строки через пробел
 int [,] FillArraySpaces(int str, int cols)
 {
     int counter = 0;
     string s;
     string[] subs;
     int [,] arr = new int [str, cols];
-    Console.Write("Введите массив через пробел:");
+    Console.WriteLine("Введите массив через пробел:");
     while(counter<str)
     {
         s =  Console.ReadLine(); 
@@ -194,8 +198,6 @@ int[,] fStrike(int [,] coord)
             coordStriked.Add(new List<int>());
             coordStriked[j].Add(++x);
             coordStriked[j].Add(++y);
-
-            Console.Write(" " + coordStriked[j][0]+ "," + coordStriked[j][1]);
             c++;
         }
         Console.WriteLine();
@@ -210,7 +212,6 @@ int[,] fStrike(int [,] coord)
             coordStriked.Add(new List<int>());
             coordStriked[j].Add(x);
             coordStriked[j].Add(++y);
-            Console.Write(" " + coordStriked[j][0]+ "," + coordStriked[j][1]);
             c++;
         }
 

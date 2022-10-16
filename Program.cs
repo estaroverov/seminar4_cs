@@ -28,7 +28,15 @@ void PrintArray(int [] arr)
     }
     
 }
-
+void PrintStrArray(string [] arr)
+{
+    Console.WriteLine();
+    foreach(string i in arr)
+    {
+        Console.Write(i + " ");
+    }
+    
+}
 int [] FillRandomArray(int length, int minVal = -100, int maxVal = 100)
 {
     int [] arr = new int [length];
@@ -120,8 +128,6 @@ int [,] FillArraySpaces(int str, int cols)
     return arr;
 }
 
-
-
 void PrintIntMultiArr(int [,] arr)
 {
     foreach(int i in arr)
@@ -129,37 +135,68 @@ void PrintIntMultiArr(int [,] arr)
 
     Console.WriteLine();
 }
-int [,] coord = FillArraySpaces(8,2);
+int [,] coord = {{1,6},{2,4},{3,1},{4,5},{5,8},{6,2},{7,7},{8,3}};
 PrintIntMultiArr(coord);
+void PrintTable(int [,] strikes, int [,] coord)
+{
+    int colString = strikes.GetLength(0);
+    Console.WriteLine("dddd"+colString);
+    int str = 8;
+    string []s=new string[str];
+        for(int i = str-1; i>=0; i--)
+        {
+            for(int j = 0; j<str; j++)
+            {
 
-void fStrike(int [,] coord)
+                for(int k = 0; k<colString; k++)
+                {
+                    if(strikes[k,0] == j+1 && strikes[k,1] == i+1)
+                    {
+                        s[j] = "S ";
+                        break;
+                    }
+                    else
+                    {
+                        s[j] = "O ";
+                    }
+                }
+                for(int n = 0; n<str; n++)
+                    if(coord[n,0] == j+1 && coord[n,1] == i+1)
+                    {
+                        s[j] = "F ";
+                    }
+            }
+            PrintStrArray(s);
+        }
+
+}
+int[,] fStrike(int [,] coord)
 {
     bool strike = false;
-    int colString = coord.GetLength(0);
+    int colString = 8;
     int lim = 8;
     int [,] coordStriked = new int [colString*lim,2];
     int x,y;
-    int rank = coord.Rank;
-    int counter1 = 0;
-    
+    int counter=0;
+    int c = 0;
     for(int i = 0; i<colString; i++)
     {
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = 0; j<colString; j++)
+        for(int j = c; j<colString+counter; j++)
         {
-            if(x == lim)
+            if(x == lim || y == lim)
                 break;
             coordStriked[j,0] = ++x;
             coordStriked[j,1] = ++y;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter1 ++;
+            c++;
         }
         Console.WriteLine();
-        int counter2 = counter1;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter1; j<colString+counter1; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(y == lim)
                 break;
@@ -167,96 +204,90 @@ void fStrike(int [,] coord)
             coordStriked[j,1] = ++y;
 
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter2++;
+            c++;
         }
         Console.WriteLine();
-        int counter3 = counter2;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter2; j<colString+counter2; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(x == lim)
                 break;
             coordStriked[j,0] = ++x;
             coordStriked[j,1] = y;
-
+            c++;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter3++;
         }
         Console.WriteLine();
-        int counter4 = counter3;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter3; j<colString+counter3; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(x==lim || y == 1)
                 break;
             coordStriked[j,0] = ++x;
             coordStriked[j,1] = --y;
-
+            c++;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter4++;
         }
         Console.WriteLine();
-        int counter5 = counter4;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter4; j<colString+counter4; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(y==1)
                 break;
             coordStriked[j,0] = x;
             coordStriked[j,1] = --y;
-
+            c++;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter5++;
         }
         Console.WriteLine();
-        int counter6 = counter5;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter5; j<colString+counter5; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(x == 1 || y == 1)
                 break;
             coordStriked[j,0] = --x;
             coordStriked[j,1] = --y;
-
+            c++;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter6++;
         }
 
         Console.WriteLine();
-        int counter7 = counter6;
+        counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter6; j<colString+counter6; j++)
+        for(int j = c; j<colString+counter; j++)
         {
             if(x==1)
                 break;
             coordStriked[j,0] = --x;
             coordStriked[j,1] = y;
-
+            c++;
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter7++;
         }
         Console.WriteLine();
-        int counter8 = counter7;
+        counter=c;
+        Console.WriteLine(counter);
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = counter7; j<colString+counter7; j++)
+        for(int j = c; j<colString +counter; j++)
         {
             if(x==1 || y == lim)
                 break;
             coordStriked[j,0] = --x;
             coordStriked[j,1] = ++y;
-
+            c++; 
             Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
-            counter8++;
         }
-
-
     }
+    PrintIntMultiArr(coordStriked);
     for(int i = 0; i<colString*lim; i++)
     {
         for(int j = 0; j<colString; j++)
@@ -264,6 +295,9 @@ void fStrike(int [,] coord)
                 strike = true; 
     }
     Console.WriteLine(strike==true?"Yes":"No");
+    return coordStriked;
 }
-fStrike(coord);
+
+//PrintTable(fStrike(coord),coord);
+PrintTable(fStrike(coord),coord);
 

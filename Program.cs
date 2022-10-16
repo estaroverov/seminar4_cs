@@ -175,7 +175,7 @@ int[,] fStrike(int [,] coord)
     bool strike = false;
     int colString = 8;
     int lim = 8;
-    int [,] coordStriked = new int [colString*lim,2];
+    int [,] coordStriked = new int [colString*lim*4,2];
     int x,y;
     int counter=0;
     int c = 0;

@@ -135,12 +135,12 @@ void PrintIntMultiArr(int [,] arr)
 
     Console.WriteLine();
 }
-int [,] coord = {{1,6},{2,4},{3,1},{4,5},{5,8},{6,2},{7,7},{8,3}};
+ int [,] coord = {{1,6},{2,4},{3,1},{4,5},{5,8},{6,2},{7,7},{8,3}};
+// int [,] coord = {{5,1},{6,1},{7,1},{8,1},{5,2},{6,2},{7,2},{8,2}};
 PrintIntMultiArr(coord);
 void PrintTable(int [,] strikes, int [,] coord)
 {
     int colString = strikes.GetLength(0);
-    Console.WriteLine("dddd"+colString);
     int str = 8;
     string []s=new string[str];
         for(int i = str-1; i>=0; i--)
@@ -152,7 +152,7 @@ void PrintTable(int [,] strikes, int [,] coord)
                 {
                     if(strikes[k,0] == j+1 && strikes[k,1] == i+1)
                     {
-                        s[j] = "S ";
+                        s[j] = "+ ";
                         break;
                     }
                     else
@@ -163,7 +163,7 @@ void PrintTable(int [,] strikes, int [,] coord)
                 for(int n = 0; n<str; n++)
                     if(coord[n,0] == j+1 && coord[n,1] == i+1)
                     {
-                        s[j] = "F ";
+                        s[j] = "Q ";
                     }
             }
             PrintStrArray(s);
@@ -173,131 +173,142 @@ void PrintTable(int [,] strikes, int [,] coord)
 int[,] fStrike(int [,] coord)
 {
     bool strike = false;
-    int colString = 8;
     int lim = 8;
-    int [,] coordStriked = new int [colString*lim*4,2];
+    List<List<int>> coordStriked = new List<List<int>>(); 
     int x,y;
     int counter=0;
     int c = 0;
-    for(int i = 0; i<colString; i++)
+    for(int i = 0; i<lim; i++)
     {
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(x == lim || y == lim)
                 break;
-            coordStriked[j,0] = ++x;
-            coordStriked[j,1] = ++y;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(++x);
+            coordStriked[j].Add(++y);
+
+            Console.Write(" " + coordStriked[j][0]+ "," + coordStriked[j][1]);
             c++;
         }
         Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(y == lim)
                 break;
-            coordStriked[j,0] = x;
-            coordStriked[j,1] = ++y;
 
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(x);
+            coordStriked[j].Add(++y);
+            Console.Write(" " + coordStriked[j][0]+ "," + coordStriked[j][1]);
             c++;
         }
-        Console.WriteLine();
+
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(x == lim)
                 break;
-            coordStriked[j,0] = ++x;
-            coordStriked[j,1] = y;
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(++x);
+            coordStriked[j].Add(y);
             c++;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
         }
-        Console.WriteLine();
+
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(x==lim || y == 1)
                 break;
-            coordStriked[j,0] = ++x;
-            coordStriked[j,1] = --y;
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(++x);
+            coordStriked[j].Add(--y);
             c++;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
         }
         Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(y==1)
                 break;
-            coordStriked[j,0] = x;
-            coordStriked[j,1] = --y;
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(x);
+            coordStriked[j].Add(--y);
             c++;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
         }
         Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(x == 1 || y == 1)
                 break;
-            coordStriked[j,0] = --x;
-            coordStriked[j,1] = --y;
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(--x);
+            coordStriked[j].Add(--y);
             c++;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
         }
 
         Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString+counter; j++)
+        for(int j = c; j<lim+counter; j++)
         {
             if(x==1)
                 break;
-            coordStriked[j,0] = --x;
-            coordStriked[j,1] = y;
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(--x);
+            coordStriked[j].Add(y);
             c++;
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
         }
-        Console.WriteLine();
         counter=c;
-        Console.WriteLine(counter);
         x = coord[i,0];
         y = coord[i,1];
-        for(int j = c; j<colString +counter; j++)
+        for(int j = c; j<lim +counter; j++)
         {
             if(x==1 || y == lim)
                 break;
-            coordStriked[j,0] = --x;
-            coordStriked[j,1] = ++y;
-            c++; 
-            Console.Write(" " + coordStriked[j,0]+ "," + coordStriked[j,1]);
+
+            coordStriked.Add(new List<int>());
+            coordStriked[j].Add(--x);
+            coordStriked[j].Add(++y);
+            c++;
         }
     }
-    PrintIntMultiArr(coordStriked);
-    for(int i = 0; i<colString*lim; i++)
+
+    int[,] temp = new int[coordStriked.Count,2];
+    for (int row = 0; row < coordStriked.Count; row++)
     {
-        for(int j = 0; j<colString; j++)
-            if(coord[j,0] == coordStriked[i,0] && coord[j,1] == coordStriked[i,1])
+        temp[row,0] = coordStriked[row][0];
+        temp[row,1] = coordStriked[row][1];
+    }
+    for(int i = 0; i<coordStriked.Count; i++)
+    {
+        for(int j = 0; j<lim; j++)
+            if(coord[j,0] == temp[i,0] && coord[j,1] == temp[i,1])
                 strike = true; 
     }
     Console.WriteLine(strike==true?"Yes":"No");
-    return coordStriked;
+    return temp;
 }
 
-//PrintTable(fStrike(coord),coord);
 PrintTable(fStrike(coord),coord);
 

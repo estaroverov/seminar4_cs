@@ -118,6 +118,8 @@ PrintArray(arr4);
 
 ////Программа принимает 8 пар чисел от 1 до 8
 ////Каждая пара чисел вводится с новой строки через пробел
+// В итоге выводится No если нет бьющих друг друга ферзей, иначе Yes
+//Также рисуется матрица расположения ферзей
 int [,] FillArraySpaces(int str, int cols)
 {
     int counter = 0;
@@ -200,7 +202,6 @@ int[,] fStrike(int [,] coord)
             coordStriked[j].Add(++y);
             c++;
         }
-        Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
@@ -242,7 +243,6 @@ int[,] fStrike(int [,] coord)
             coordStriked[j].Add(--y);
             c++;
         }
-        Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
@@ -256,7 +256,6 @@ int[,] fStrike(int [,] coord)
             coordStriked[j].Add(--y);
             c++;
         }
-        Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];
@@ -271,7 +270,6 @@ int[,] fStrike(int [,] coord)
             c++;
         }
 
-        Console.WriteLine();
         counter=c;
         x = coord[i,0];
         y = coord[i,1];

@@ -1,25 +1,4 @@
-﻿int Power(int a, int b)
-{
-    if(b>=0)
-    {
-        int p = a;
-        for(int i=1; i<b; i++)
-            a *= p;
-        return a;
-    }
-    else
-    {
-        Console.Write("Степень неположительная:");
-        return b;
-    }
-
-}
-void inputNum(string s = "Введите число:")
-{
-    Console.Write(s);
-}
-
-void PrintArray(int [] arr)
+﻿void PrintArray(int [] arr)
 {
     Console.WriteLine();
     foreach(int i in arr)
@@ -46,6 +25,35 @@ int [] FillRandomArray(int length, int minVal = -100, int maxVal = 100)
     }
     return arr;
 }
+//Первая задача
+int Power(int a, int b)
+{
+    if(b>=0)
+    {
+        int p = a;
+        for(int i=1; i<b; i++)
+            a *= p;
+        return a;
+    }
+    else
+    {
+        Console.Write("Степень неположительная:");
+        return b;
+    }
+
+}
+void inputNum(string s = "Введите число:")
+{
+    Console.Write(s);
+}
+inputNum();
+int a = int.Parse(Console.ReadLine());
+inputNum("Введите степень, в которую нужно возвести число:");
+int b = int.Parse(Console.ReadLine());
+Console.WriteLine(Power(a,b));
+
+
+///Вторая задача
 int sumNum(int a)
 {
     int sum = 0;
@@ -56,6 +64,12 @@ int sumNum(int a)
     }
     return sum;
 }
+
+inputNum();
+int c = int.Parse(Console.ReadLine());
+Console.Write(sumNum(c));
+
+///Третья задача
 int [] sumNumArr(int [] arr)
 {
     int len = arr.Length;
@@ -64,16 +78,6 @@ int [] sumNumArr(int [] arr)
         arr1[i] = sumNum(arr[i]);
     return arr1;
 }
-inputNum();
-int a = int.Parse(Console.ReadLine());
-inputNum("Введите степень, в которую нужно возвести число:");
-int b = int.Parse(Console.ReadLine());
-Console.WriteLine(Power(a,b));
-
-
-inputNum();
-int c = int.Parse(Console.ReadLine());
-Console.Write(sumNum(c));
 
 int [] arr = FillRandomArray(8,100,9999);
 PrintArray(arr);
@@ -135,8 +139,9 @@ void PrintIntMultiArr(int [,] arr)
 
     Console.WriteLine();
 }
- int [,] coord = {{1,6},{2,4},{3,1},{4,5},{5,8},{6,2},{7,7},{8,3}};
+// int [,] coord = {{1,6},{2,4},{3,1},{4,5},{5,8},{6,2},{7,7},{8,3}};
 // int [,] coord = {{5,1},{6,1},{7,1},{8,1},{5,2},{6,2},{7,2},{8,2}};
+int [,] coord = FillArraySpaces(8,2);
 PrintIntMultiArr(coord);
 void PrintTable(int [,] strikes, int [,] coord)
 {
